@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Denuncias</title>
+    <link rel="stylesheet" type="text/css" href="css/Style_den.css">
+    <img class="logo" src="img/Dante.png" id="logo-img">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+
+<header>
+    <ul>
+        <a href="index.html">Inicio</a>
+        <a href="Rie_dom.html">Riesgos Domésticos</a>
+        <a href="Prev_social.html">Prevención Social</a>         
+        <a href="https://loprado.cl/dimao/operaciones-y-emergencias/">Municipalidad</a>
+    </ul>
+</header>
+
+<body>
+    <script src="js/Denuncia.js"></script>
+    <div class="fondo"></div>
+
+    <form name="form" class="form" action="" id="denunciaForm">
+        <h1>¡DENUNCIA! Evitemos las cifras negras</h1>
+
+        <p>Tipo de denuncia
+            <select id="tipoDenuncia" required>
+                <option value="">Seleccionar...</option>
+                <option value="Robo en vía pública">Robo en vía pública</option>
+                <option value="Robo en propiedad privada">Robo en propiedad privada</option>
+                <option value="Acoso callejero">Acoso callejero</option>
+                <option value="Contaminación de la vía pública">Contaminación de la vía pública</option>
+                <option value="Ruidos molestos">Ruidos molestos</option>
+                <option value="Abandono animal">Abandono animal</option>
+                <option value="Maltrato animal">Maltrato animal</option>
+                <option value="Adulto mayor vulnerado">Adulto mayor vulnerado</option>
+                <option value="Menor vulnerado">Menor vulnerado</option>
+                <option value="Problema con alcantarillado comunal">Problema con alcantarillado comunal</option>
+                <option value="Problema con el tendido eléctrico o alumbrado público">Problema con el tendido eléctrico o alumbrado público</option>
+                <option value="Calle en mal estado">Calle en mal estado</option>
+                <option value="Venta de drogas">Venta de drogas</option>
+                <option value="Mala convivencia">Mala convivencia</option>
+            </select>
+        </p>
+
+        <p>¿Anónimo?
+            <select id="anonimo" required>
+                <option value="">Seleccionar...</option>
+                <option value="Sí">Sí</option>
+                <option value="No">No</option>
+            </select>
+        </p>
+
+        <p><textarea id="comentario" rows="5" cols="70" placeholder="Escriba su comentario aquí..." required></textarea></p>
+
+        <input type="button" value="ENVIAR" onclick="generarPDF()">
+    </form>
+                 
+    <audio controls>
+        <source src="sound/CifrasNegras.mp3" type="audio/mpeg">
+    </audio>
+</body>
+
+<footer>
+    <p>Lo Prado Seguridad</p>
+</footer>
+
+<script>
+// Función para generar el PDF cuando el formulario se envíe
+function generarPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    // Establecer márgenes y formato de fuente
+    doc.setFont('Helvetica', 'normal');
+    doc.setFontSize(12);
+
+    // Obtener los valores del formulario
+    const tipoDenuncia = document.getElementById('tipoDenuncia').value;
+    const anonimo = document.getElementById('anonimo').value;
+    const comentario = document.getElementById('comentario').value;
+
+    // Obtener los datos del usuario desde sessionStorage
+    const nombre = sessionStorage.getItem('nombre');
+    const rut = sessionStorage.getItem('rut');
+    const email = sessionStorage.getItem('email');
+    const direccion = sessionStorage.getItem('direccion');
+    const comuna = sessionStorage.getItem('comuna');
+    const edad = sessionStorage.getItem('edad');
+
+    // Validar que todos los campos estén completos
+    if (!tipoDenuncia || !anonimo || !comentario) {
+        alert("Por favor, complete todos los campos.");
+        return;
+    }
+
+    // Encabezado del PDF (título y detalles iniciales)
+    doc.setFontSize(16);
+    doc.text('Reporte de Denuncia', 20, 20);
+    doc.setFontSize(12);
+    doc.text('Fecha: ' + new Date().toLocaleDateString(), 20, 30);
+
+    // Línea divisoria
+    doc.setLineWidth(0.5);
+    doc.line(20, 35, 190, 35); // Dibuja una línea horizontal en la parte superior
+
+    // Añadir información del usuario
+    doc.text(`Nombre: ${nombre}`, 20, 45);
+    doc.text(`RUT: ${rut}`, 20, 55);
+    doc.text(`Edad: ${edad} años`, 20, 65);
+    doc.text(`Correo: ${email}`, 20, 75);
+    doc.text(`Comuna: ${comuna}`, 20, 85);
+    doc.text(`Dirección: ${direccion}`, 20, 95);
+
+    // Añadir contenido de la denuncia
+    doc.text(`Tipo de Denuncia: ${tipoDenuncia}`, 20, 105);
+    doc.text(`Anónimo: ${anonimo}`, 20, 115);
+    doc.text('Comentario:', 20, 125);
+
+    // Dividir el comentario largo en varias líneas si es necesario
+    const comentarioLines = doc.splitTextToSize(comentario, 170);
+    doc.text(comentarioLines, 20, 135);
+
+    // Línea divisoria inferior
+    doc.setLineWidth(0.5);
+    doc.line(20, 240, 190, 240); // Línea horizontal antes del logo
+
+    // Añadir logo al pie de página
+    const logoUrl = document.getElementById('logo-img').src;
+    doc.addImage(logoUrl, 'PNG', 80, 250, 50, 20); // Añadir logo en la parte inferior
+
+    // Guardar el PDF con un nombre relacionado con el tipo de denuncia
+    doc.save(`Denuncia_${tipoDenuncia}.pdf`);
+
+    // Mostrar mensaje de éxito y redirigir al usuario
+    alert("¡Denuncia enviada correctamente! El PDF ha sido generado.");
+    window.location.href = "Denuncia.html"; // Redirige a la página de denuncia
+}
+</script>

@@ -1,0 +1,10 @@
+@daniel1,1234,1234,DANIEL PEREZ GARCÍA,12.345.678-9,daniel.perez@example.com,Calle Ficticia 123,Lo Prado,30
+@maria,5678,5678,MARIA GÓMEZ RIVERA,18.765.432-1,maria.gomez@example.com,Avenida Siempre Viva 456,Lo Prado,25
+@juan,222222,222222,JUAN RIVERA MUÑOZ,9.876.543-2,juan.rivera@example.com,Calle Libertad 789,Lo Prado,28
+@carla,222222,222222,CARLA LOPEZ CONTRERAS,19.876.543-3,carla.lopez@example.com,Plaza Central 321,Lo Prado,24
+@pedro,asd123,asd123,PEDRO MARTÍNEZ SOTO,20.234.567-4,pedro.martinez@example.com,Calle 10 de Julio 654,Lo Prado,35
+@ana,1617,1617,ANA JIMÉNEZ PAREDES,21.234.567-5,ana.jimenez@example.com,Pasaje Norte 111,Lo Prado,32
+@luis,1819,1819,LUIS FERNÁNDEZ CASTRO,22.345.678-6,luis.fernandez@example.com,Calle Los Naranjos 432,Lo Prado,29
+@paula,2021,2021,PAULA TORO VÁSQUEZ,23.456.789-7,paula.toro@example.com,Av. O'Higgins 654,Lo Prado,27
+@jota,111111,111111,JORGE CASTRO ALVAREZ,24.567.890-8,jorge.castro@example.com,Calle San Martín 987,Lo Prado,33
+@rosa,2425,2425,ROSA HERRERA GUTIÉRREZ,25.678.901-9,rosa.herrera@example.com,Pasaje Oriente 321,Lo Prado,26

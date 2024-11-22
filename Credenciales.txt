@@ -1,0 +1,10 @@
+usuario: daniel
+contrase�a: 1234
+n� poblador: 1234
+
+{ usuario: "daniel", password: 1234, poblador: 1234 },
+        { usuario: "maria", password: 5678, poblador: 5678 },
+        { usuario: "juan", password: 91011, poblador: 91011 },
+        { usuario: "carla", password: 1213, poblador: 1213 },
+        { usuario: "pedro", password: 1415, poblador: 1415 },
+        { usuario: "ana", password: 1617, poblador: 1617 }
